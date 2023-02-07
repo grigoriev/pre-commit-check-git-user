@@ -1,0 +1,15 @@
+- id: check-git-config-user-email
+  name: Check Git config user.email
+  description: This hook checks to ensure the Git config user.email matches provided template.
+  entry: check-git-config-user-email
+  language: python
+  pass_filenames: false
+  always_run: true
+
+- id: check-git-config-user-name
+  name: Check Git config user.name
+  description: This hook checks to ensure the Git config user.name matches provided template.
+  entry: check-git-config-user-name
+  language: python
+  pass_filenames: false
+  always_run: true
