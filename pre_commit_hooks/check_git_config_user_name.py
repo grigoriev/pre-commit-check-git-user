@@ -40,6 +40,7 @@ def main(argv=None):
         else:
             for template in args.templates:
                 if re.match(template, user_name):
+                    print("Git config user.name is matched to provided template: " + template)
                     return 0
             print("Git config user.name is not matched to any provided templates.")
             print("Git config user.name: " + user_name)
