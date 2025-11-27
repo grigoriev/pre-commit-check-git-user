@@ -5,10 +5,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 from unittest.mock import MagicMock, patch
 
+import pytest
+
 from pre_commit_hooks.check_git_config_user_name import build_argument_parser, main
 
 if TYPE_CHECKING:
-    import pytest
+    pass
 
 
 class TestBuildArgumentParser:
@@ -113,3 +115,95 @@ class TestMain:
         result = main(["--templates", "John Doe"])
 
         assert result == 0
+
+    # Edge cases: Unicode characters
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_unicode_name_cyrillic(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
+        """Should handle Cyrillic characters in names."""
+        mock_run.return_value = MagicMock(stdout="Иван Иванов\n", returncode=0)
+
+        result = main(["--templates", "Иван.*"])
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "matched to provided template" in captured.out
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_unicode_name_chinese(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
+        """Should handle Chinese characters in names."""
+        mock_run.return_value = MagicMock(stdout="张伟\n", returncode=0)
+
+        result = main(["--templates", "张.*"])
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "matched to provided template" in captured.out
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_unicode_name_with_diacritics(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
+        """Should handle diacritics in names."""
+        mock_run.return_value = MagicMock(stdout="José García\n", returncode=0)
+
+        result = main(["--templates", "José.*"])
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "matched to provided template" in captured.out
+
+    # Edge cases: Special characters
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_name_with_hyphen(self, mock_run: MagicMock) -> None:
+        """Should handle hyphenated names."""
+        mock_run.return_value = MagicMock(stdout="Mary-Jane Watson\n", returncode=0)
+
+        result = main(["--templates", "Mary-Jane.*"])
+
+        assert result == 0
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_name_with_apostrophe(self, mock_run: MagicMock) -> None:
+        """Should handle names with apostrophes."""
+        mock_run.return_value = MagicMock(stdout="O'Brien\n", returncode=0)
+
+        result = main(["--templates", "O'Brien"])
+
+        assert result == 0
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_name_with_period(self, mock_run: MagicMock) -> None:
+        """Should handle names with periods (e.g., initials)."""
+        mock_run.return_value = MagicMock(stdout="J. R. R. Tolkien\n", returncode=0)
+
+        # Note: . in regex matches any character, so we escape it
+        result = main(["--templates", r"J\. R\. R\. Tolkien"])
+
+        assert result == 0
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_single_name(self, mock_run: MagicMock) -> None:
+        """Should handle single-word names."""
+        mock_run.return_value = MagicMock(stdout="Madonna\n", returncode=0)
+
+        result = main(["--templates", "^Madonna$"])
+
+        assert result == 0
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_name_with_numbers(self, mock_run: MagicMock) -> None:
+        """Should handle names containing numbers."""
+        mock_run.return_value = MagicMock(stdout="John Doe 3rd\n", returncode=0)
+
+        result = main(["--templates", "John Doe.*"])
+
+        assert result == 0
+
+    @patch("pre_commit_hooks.check_git_config_user_name.subprocess.run")
+    def test_empty_name_after_strip(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
+        """Should reject names that are only whitespace."""
+        mock_run.return_value = MagicMock(stdout="   \n", returncode=0)
+
+        result = main(["--templates", ".*"])
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "Git config user.name is not set" in captured.out

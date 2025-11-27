@@ -6,6 +6,8 @@ import re
 from typing import TYPE_CHECKING
 from unittest.mock import MagicMock, patch
 
+import pytest
+
 from pre_commit_hooks.check_git_config_user_email import (
     EMAIL_PATTERN,
     build_argument_parser,
@@ -13,7 +15,7 @@ from pre_commit_hooks.check_git_config_user_email import (
 )
 
 if TYPE_CHECKING:
-    import pytest
+    pass
 
 
 class TestBuildArgumentParser:
@@ -38,15 +40,42 @@ class TestBuildArgumentParser:
 class TestEmailPattern:
     """Tests for EMAIL_PATTERN constant."""
 
-    def test_valid_email_matches(self) -> None:
-        assert re.match(EMAIL_PATTERN, "user@example.com")
-        assert re.match(EMAIL_PATTERN, "john.doe@company.org")
-        assert re.match(EMAIL_PATTERN, "test+label@gmail.com")
+    @pytest.mark.parametrize(
+        "email",
+        [
+            "user@example.com",
+            "john.doe@company.org",
+            "test+label@gmail.com",
+            "user_name@domain.co.uk",
+            "first-last@sub.domain.com",
+            "user123@test123.org",
+            "a@b.co",
+        ],
+    )
+    def test_valid_emails_match(self, email: str) -> None:
+        """Valid email addresses should match the pattern."""
+        assert re.match(EMAIL_PATTERN, email), f"Expected {email} to match"
 
-    def test_invalid_email_does_not_match(self) -> None:
-        assert not re.match(EMAIL_PATTERN, "not-an-email")
-        assert not re.match(EMAIL_PATTERN, "@example.com")
-        assert not re.match(EMAIL_PATTERN, "user@")
+    @pytest.mark.parametrize(
+        "email",
+        [
+            "not-an-email",
+            "@example.com",
+            "user@",
+            "user@domain",
+            "user@domain..com",
+            "user@@domain.com",
+            "user@.domain.com",
+            "user@domain.c",
+            "",
+            "user@ domain.com",
+            "user @domain.com",
+            "user@domain .com",
+        ],
+    )
+    def test_invalid_emails_do_not_match(self, email: str) -> None:
+        """Invalid email addresses should not match the pattern."""
+        assert not re.match(EMAIL_PATTERN, email), f"Expected {email} to NOT match"
 
 
 class TestMain:
@@ -128,6 +157,28 @@ class TestMain:
     def test_invalid_email_format_returns_error(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
         """When email doesn't look like email, should return 1."""
         mock_run.return_value = MagicMock(stdout="not-an-email\n", returncode=0)
+
+        result = main(["--templates", ".*"])
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "does not look like an email" in captured.out
+
+    @patch("pre_commit_hooks.check_git_config_user_email.subprocess.run")
+    def test_consecutive_dots_in_domain_rejected(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
+        """Email with consecutive dots in domain should be rejected."""
+        mock_run.return_value = MagicMock(stdout="user@domain..com\n", returncode=0)
+
+        result = main(["--templates", ".*"])
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "does not look like an email" in captured.out
+
+    @patch("pre_commit_hooks.check_git_config_user_email.subprocess.run")
+    def test_email_without_tld_rejected(self, mock_run: MagicMock, capsys: pytest.CaptureFixture[str]) -> None:
+        """Email without TLD should be rejected."""
+        mock_run.return_value = MagicMock(stdout="user@domain\n", returncode=0)
 
         result = main(["--templates", ".*"])
         captured = capsys.readouterr()

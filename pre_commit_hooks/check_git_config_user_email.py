@@ -9,7 +9,16 @@ import subprocess
 from collections.abc import Sequence
 from typing import Final
 
-EMAIL_PATTERN: Final[str] = r"^\S+@\S+\.\S+$"
+# RFC 5321 simplified email pattern:
+# - Local part: alphanumeric, dots, hyphens, underscores, plus signs
+# - Domain: alphanumeric and hyphens, separated by dots (no consecutive dots)
+# - TLD: at least 2 characters
+EMAIL_PATTERN: Final[str] = (
+    r"^[a-zA-Z0-9._%+-]+"  # Local part
+    r"@[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?"  # Domain start
+    r"(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*"  # Subdomains
+    r"\.[a-zA-Z]{2,}$"  # TLD
+)
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
