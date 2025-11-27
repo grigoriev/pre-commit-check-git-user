@@ -1,7 +1,7 @@
 # pre-commit-check-git-user
 
 [![CI](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/python-package.yml/badge.svg)](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/python-package.yml)
-[![PyPI version](https://badge.fury.io/py/pre-commit-check-git-user.svg)](https://badge.fury.io/py/pre-commit-check-git-user)
+[![GitHub Release](https://img.shields.io/github/v/release/grigoriev/pre-commit-check-git-user)](https://github.com/grigoriev/pre-commit-check-git-user/releases)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)

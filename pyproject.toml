@@ -60,6 +60,9 @@ ignore = []
 [tool.ruff.lint.isort]
 known-first-party = ["pre_commit_hooks"]
 
+[tool.uv]
+required-version = ">=0.5.0"
+
 [tool.coverage.run]
 source = ["pre_commit_hooks"]
 branch = true
