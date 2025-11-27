@@ -7,7 +7,7 @@ setup(
     name="pre-commit-check-git-user",
     description="Pre-commit hooks for checking Git user settings.",
     url="https://github.com/grigoriev/pre-commit-check-git-user",
-    version="0.9.0",
+    version="0.9.1",
     author="Sergey Grigoriev",
     author_email="s.grigoriev@gmail.com",
     packages=["pre_commit_hooks"],
