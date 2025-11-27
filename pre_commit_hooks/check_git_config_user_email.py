@@ -6,7 +6,7 @@ import argparse
 import re
 import subprocess
 
-EMAIL_PATTERN = "/^\S+@\S+\.\S+$/"
+EMAIL_PATTERN = r"^\S+@\S+\.\S+$"
 
 
 def build_argument_parser():
@@ -46,7 +46,10 @@ def main(argv=None):
         else:
             for template in args.templates:
                 if re.match(template, user_email):
-                    print("Git config user.email is matched to provided template: " + template)
+                    print(
+                        "Git config user.email is matched to provided template: "
+                        + template
+                    )
                     return 0
             print("Git config user.email is not matched to any provided templates.")
             print("Git config user.email: " + user_email)
