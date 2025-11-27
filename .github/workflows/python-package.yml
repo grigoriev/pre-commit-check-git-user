@@ -34,8 +34,8 @@ jobs:
       - name: Type check with mypy
         run: uv run mypy pre_commit_hooks tests
 
-      - name: Run tests
-        run: uv run pytest tests/ -v --cov=pre_commit_hooks --cov-report=term-missing
+      - name: Run tests with coverage
+        run: uv run pytest tests/ -v --cov --cov-report=term-missing --cov-fail-under=90
 
   build:
     runs-on: ubuntu-latest
