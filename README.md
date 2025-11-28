@@ -1,6 +1,8 @@
 # pre-commit-check-git-user
 
 [![CI](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/python-package.yml/badge.svg)](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/python-package.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=coverage)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
 [![GitHub Release](https://img.shields.io/github/v/release/grigoriev/pre-commit-check-git-user)](https://github.com/grigoriev/pre-commit-check-git-user/releases)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
