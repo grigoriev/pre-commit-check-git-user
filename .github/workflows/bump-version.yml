@@ -86,5 +86,4 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "The [release workflow](../../actions/workflows/release.yml) will now:" >> $GITHUB_STEP_SUMMARY
           echo "- Run tests" >> $GITHUB_STEP_SUMMARY
-          echo "- Publish to PyPI" >> $GITHUB_STEP_SUMMARY
           echo "- Create GitHub Release" >> $GITHUB_STEP_SUMMARY
