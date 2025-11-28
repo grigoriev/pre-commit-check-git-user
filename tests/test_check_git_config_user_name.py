@@ -2,15 +2,11 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from pre_commit_hooks.check_git_config_user_name import build_argument_parser, main
-
-if TYPE_CHECKING:
-    pass
 
 
 class TestBuildArgumentParser:
