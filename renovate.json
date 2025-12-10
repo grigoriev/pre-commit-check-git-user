@@ -4,6 +4,6 @@
     "config:recommended"
   ],
   "automerge": true,
-  "automergeType": "pr",
-  "platformAutomerge": true
+  "automergeType": "branch",
+  "platformAutomerge": false
 }
