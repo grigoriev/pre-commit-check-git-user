@@ -4,8 +4,7 @@
     "config:recommended"
   ],
   "dependencyDashboard": true,
-  "dependencyDashboardApproval": false,
   "automerge": true,
   "automergeType": "pr",
-  "platformAutomerge": true
+  "platformAutomerge": false
 }
