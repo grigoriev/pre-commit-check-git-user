@@ -6,6 +6,6 @@
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
   "automerge": true,
-  "automergeType": "branch",
-  "platformAutomerge": false
+  "automergeType": "pr",
+  "platformAutomerge": true
 }
