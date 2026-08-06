@@ -1,6 +1,6 @@
 # pre-commit-check-git-user
 
-[![CI](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/python-package.yml/badge.svg)](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/python-package.yml)
+[![CI](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/ci.yml/badge.svg)](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/ci.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=coverage)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
 [![GitHub Release](https://img.shields.io/github/v/release/grigoriev/pre-commit-check-git-user)](https://github.com/grigoriev/pre-commit-check-git-user/releases)
@@ -136,7 +136,7 @@ uv run ruff format .
 │   ├── test_check_git_config_user_email.py
 │   └── test_check_git_config_user_name.py
 ├── .github/workflows/
-│   ├── python-package.yml
+│   ├── ci.yml
 │   └── release.yml
 ├── pyproject.toml
 └── .pre-commit-hooks.yaml
