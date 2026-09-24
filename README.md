@@ -40,7 +40,7 @@ pre-commit install
 
 ### Verify
 
-Each GitHub release carries a signed provenance bundle. Verify a downloaded file with
+GitHub releases after 0.9.3 carry a signed provenance bundle. Verify a downloaded file with
 `gh attestation verify <file> --repo grigoriev/pre-commit-check-git-user`.
 
 ## Hooks
