@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/ci.yml/badge.svg)](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/ci.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/grigoriev/pre-commit-check-git-user/badge)](https://scorecard.dev/viewer/?uri=github.com/grigoriev/pre-commit-check-git-user)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/14803/badge)](https://www.bestpractices.dev/projects/14803)
 [![GitHub Release](https://img.shields.io/github/v/release/grigoriev/pre-commit-check-git-user)](https://github.com/grigoriev/pre-commit-check-git-user/releases)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
