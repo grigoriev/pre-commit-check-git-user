@@ -102,14 +102,13 @@ def test_example(self, mock_run):
   - Runs tests
   - Creates GitHub release with the wheel, the sdist and a signed provenance bundle
     (`actions/attest-build-provenance`, `*.intoto.jsonl`)
+  - Takes the release notes from the `CHANGELOG.md` section of the version
 
 ## Release Process
 
-1. Update version in `pyproject.toml`
-2. Commit changes
-3. Create and push tag:
-   ```bash
-   git tag v0.9.2
-   git push origin v0.9.2
-   ```
-4. GitHub Actions creates the GitHub release. The package is not published to PyPI
+1. Add each change under `## [Unreleased]` in `CHANGELOG.md`, in the pull request that makes it
+2. Run the **Bump Version & Release** workflow with `patch`, `minor` or `major`. It writes the
+   version to `pyproject.toml` and `README.md`, moves the Unreleased entries into a section for
+   the new version, commits, tags `vX.Y.Z` and pushes
+3. The tag triggers `release.yml`, which creates the GitHub release. The package is not
+   published to PyPI
