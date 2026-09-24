@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add an actionlint and zizmor `lint` job to CI.
 - Add the OpenSSF Scorecard workflow and badge.
 - Let Renovate pin GitHub Actions by commit digest.
+- Attach a signed build provenance bundle (`*.intoto.jsonl`) to each GitHub release.
 
 ### Changed
 

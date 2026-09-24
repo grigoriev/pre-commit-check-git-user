@@ -38,6 +38,11 @@ Then install:
 pre-commit install
 ```
 
+### Verify
+
+GitHub releases after 0.9.3 carry a signed provenance bundle. Verify a downloaded file with
+`gh attestation verify <file> --repo grigoriev/pre-commit-check-git-user`.
+
 ## Hooks
 
 ### check-git-config-user-email

@@ -41,6 +41,8 @@ jobs:
     needs: test
     permissions:
       contents: write
+      id-token: write
+      attestations: write
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -53,7 +55,19 @@ jobs:
       - name: Build package
         run: uv build
 
+      - name: Attest build provenance
+        id: attest
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            dist/*.whl
+            dist/*.tar.gz
+
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" --generate-notes dist/*.whl dist/*.tar.gz
+          BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          # The signed provenance bundle travels with the files.
+          cp "$BUNDLE" "dist/pre-commit-check-git-user-${GITHUB_REF_NAME#v}.intoto.jsonl"
+          gh release create "$GITHUB_REF_NAME" --generate-notes dist/*.whl dist/*.tar.gz dist/*.intoto.jsonl

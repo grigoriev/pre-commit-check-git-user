@@ -101,7 +101,8 @@ def test_example(self, mock_run):
 - **Release** (`release.yml`): Runs on `v*` tags
   - Runs tests
   - Publishes to PyPI (trusted publisher)
-  - Creates GitHub release
+  - Creates GitHub release with the wheel, the sdist and a signed provenance bundle
+    (`actions/attest-build-provenance`, `*.intoto.jsonl`)
 
 ## Release Process
 
