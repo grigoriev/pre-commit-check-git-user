@@ -143,11 +143,15 @@ uv run ruff format .
 ├── tests/
 │   ├── test_check_git_config_user_email.py
 │   └── test_check_git_config_user_name.py
-├── .github/workflows/
-│   ├── bump-version.yml
-│   ├── ci.yml
-│   ├── release.yml
-│   └── scorecard.yml
+├── .github/
+│   ├── scripts/
+│   │   ├── changelog-cut.sh
+│   │   └── changelog-section.sh
+│   └── workflows/
+│       ├── bump-version.yml
+│       ├── ci.yml
+│       ├── release.yml
+│       └── scorecard.yml
 ├── pyproject.toml
 └── .pre-commit-hooks.yaml
 ```
