@@ -28,5 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Disclaimer section in the README.
 
+### Fixed
+
+- A rerun of the release workflow uploads the files to the existing release
+  instead of failing.
+
 Earlier releases are listed on the
 [GitHub releases page](https://github.com/grigoriev/pre-commit-check-git-user/releases).
