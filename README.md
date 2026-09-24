@@ -25,7 +25,7 @@ Add to your `.pre-commit-config.yaml`:
 ```yaml
 repos:
   - repo: https://github.com/grigoriev/pre-commit-check-git-user
-    rev: v0.9.3
+    rev: v0.9.4
     hooks:
       - id: check-git-config-user-email
         args: ["--templates", ".*@company\\.com$", ".*@personal\\.email$"]
