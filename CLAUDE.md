@@ -86,9 +86,16 @@ def test_example(self, mock_run):
 
 ## CI/CD
 
-- **CI** (`python-package.yml`): Runs on push/PR to main
-  - Tests on Python 3.11, 3.12, 3.13
+- **CI** (`ci.yml`): Runs on push/PR to main
+  - Lint job: actionlint and zizmor audit the workflows
+  - Tests on Python 3.11, 3.12, 3.13, 3.14
   - Linting, type checking, tests, build
+
+- **Scorecard** (`scorecard.yml`): OpenSSF Scorecard, weekly and on push to main
+
+- **Workflow security**: every workflow sets top-level `permissions`, checkouts use
+  `persist-credentials: false`, `${{ }}` values reach `run:` through `env:`, and every
+  action is pinned by commit SHA
 
 - **Release** (`release.yml`): Runs on `v*` tags
   - Runs tests
