@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Run CI once per commit on Renovate branches: drop `renovate/**` from the push trigger
   and the `create-pr-on-failure` job that served it.
 - Create the GitHub release with `gh release create` instead of a third-party action.
+- Renovate takes its common rules from the shared preset `github>grigoriev/renovate-config`.
 
 ### Added
 
