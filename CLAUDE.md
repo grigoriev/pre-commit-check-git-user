@@ -93,9 +93,10 @@ def test_example(self, mock_run):
 
 - **Scorecard** (`scorecard.yml`): OpenSSF Scorecard, weekly and on push to main
 
-- **Workflow security**: every workflow sets top-level `permissions`, checkouts use
-  `persist-credentials: false`, `${{ }}` values reach `run:` through `env:`, and every
-  action is pinned by commit SHA
+- **Workflow security**: every workflow sets top-level `permissions`, `${{ }}` values
+  reach `run:` through `env:`, and every action is pinned by commit SHA. Checkouts use
+  `persist-credentials: false`. Only the bump-version checkout keeps the PAT credentials,
+  because its Commit and tag step pushes with them
 
 - **Release** (`release.yml`): Runs on `v*` tags
   - Runs tests

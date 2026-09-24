@@ -96,7 +96,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [test, sonar]
+    needs: [lint, test, sonar]
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -119,7 +119,7 @@ jobs:
 
   create-pr-on-failure:
     runs-on: ubuntu-latest
-    needs: [test, sonar, build]
+    needs: [lint, test, sonar, build]
     if: failure() && startsWith(github.ref, 'refs/heads/renovate/')
     permissions:
       contents: write
