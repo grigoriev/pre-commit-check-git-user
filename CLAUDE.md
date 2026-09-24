@@ -95,14 +95,17 @@ def test_example(self, mock_run):
 
 - **Workflow security**: every workflow sets top-level `permissions`, `${{ }}` values
   reach `run:` through `env:`, and every action is pinned by commit SHA. Checkouts use
-  `persist-credentials: false`. Only the bump-version checkout keeps the PAT credentials,
-  because its Commit and tag step pushes with them
+  `persist-credentials: false`, bump-version too: its Commit and tag step pushes with
+  `PAT_TOKEN` through `GIT_ASKPASS`. CI cancels older runs of a pull request, and every
+  job has `timeout-minutes`
 
 - **Release** (`release.yml`): Runs on `v*` tags
   - Runs tests
   - Creates GitHub release with the wheel, the sdist and a signed provenance bundle
     (`actions/attest-build-provenance`, `*.intoto.jsonl`)
   - Takes the release notes from the `CHANGELOG.md` section of the version
+  - Releases are immutable: one `gh release create` call attaches all files, and a rerun
+    for a tag that has a release fails
 
 ## Release Process
 

@@ -11,6 +11,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -25,7 +26,9 @@ jobs:
         uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
 
       - name: Set up Python ${{ matrix.python-version }}
-        run: uv python install ${{ matrix.python-version }}
+        env:
+          PYTHON_VERSION: ${{ matrix.python-version }}
+        run: uv python install "$PYTHON_VERSION"
 
       - name: Install dependencies
         run: uv sync --all-extras
@@ -39,6 +42,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     needs: test
+    timeout-minutes: 15
     permissions:
       contents: write
       id-token: write
@@ -56,6 +60,17 @@ jobs:
       # A tag without that section fails here, before anything is published.
       - name: Read the release notes from CHANGELOG.md
         run: .github/scripts/changelog-section.sh "${GITHUB_REF_NAME#v}" "$GITHUB_REPOSITORY" > "$RUNNER_TEMP/release-notes.md"
+
+      # Releases are immutable: the release gets all its files in the one create
+      # call below. A tag that has a release already stops here, before the build.
+      - name: Refuse an existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "::error::Release $GITHUB_REF_NAME exists. Releases are immutable: release a new version."
+            exit 1
+          fi
 
       - name: Build package
         run: uv build
@@ -75,11 +90,5 @@ jobs:
         run: |
           # The signed provenance bundle travels with the files.
           cp "$BUNDLE" "dist/pre-commit-check-git-user-${GITHUB_REF_NAME#v}.intoto.jsonl"
-          # A rerun replaces the files of the existing release.
-          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" dist/*.whl dist/*.tar.gz dist/*.intoto.jsonl \
-              --repo "$GITHUB_REPOSITORY" --clobber
-          else
-            gh release create "$GITHUB_REF_NAME" dist/*.whl dist/*.tar.gz dist/*.intoto.jsonl \
-              --repo "$GITHUB_REPOSITORY" --notes-file "$RUNNER_TEMP/release-notes.md"
-          fi
+          gh release create "$GITHUB_REF_NAME" dist/*.whl dist/*.tar.gz dist/*.intoto.jsonl \
+            --repo "$GITHUB_REPOSITORY" --notes-file "$RUNNER_TEMP/release-notes.md"

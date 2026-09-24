@@ -1,31 +1,36 @@
 # Contributing
 
-Thanks for your interest in improving this project.
+Issues and pull requests are welcome.
 
-## Development
-
-This project uses [uv](https://docs.astral.sh/uv/). Run the checks with:
+## Build and test
 
 ```sh
-uv run ruff check .
-uv run mypy .
-uv run pytest
+uv sync --all-extras                # install the dependencies
+uv run ruff check .                 # lint
+uv run ruff format --check .        # format check
+uv run mypy pre_commit_hooks tests  # type check
+uv run pytest tests/ --cov          # tests with coverage
+uv build                            # wheel and sdist
 ```
 
-## Commit messages
+CI runs actionlint, zizmor, ruff, mypy, the tests on Python 3.11 to 3.14 and SonarCloud for
+every pull request.
 
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
-`type: subject`, imperative mood, lowercase first letter, no trailing period,
-subject under 50 characters. Types: `feat`, `fix`, `docs`, `style`, `refactor`,
-`perf`, `test`, `build`, `ci`, `chore`.
+## Pull requests
 
-## Style
+1. Branch from the default branch as `type/description`, for example `fix/empty-title`.
+2. Keep one change per pull request. New behavior comes with tests; a bug fix adds a test that
+   fails without it.
+3. Write commit messages as [Conventional Commits](https://www.conventionalcommits.org/) without a
+   scope: `feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`, `build: ...`,
+   `ci: ...`, `chore: ...`.
+4. Sign your commits. The default branch accepts verified signatures only.
+5. Add an entry under `## [Unreleased]` in `CHANGELOG.md`, written for users: the release notes
+   quote it. Update the README when behavior or configuration changes.
 
-- American spelling.
-- One idea per sentence, active voice.
-- Keep changes minimal and focused on the task.
-- Do not use em dashes.
+Pull requests are squash-merged once all required checks are green.
 
-## Before opening a pull request
+## Releases
 
-- Run the checks above and make sure CI is green.
+A maintainer runs the Bump Version workflow. It moves the Unreleased entries into a versioned
+section, tags the release, and the Release workflow publishes it with signed build provenance.

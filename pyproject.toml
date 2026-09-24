@@ -9,7 +9,7 @@ description = "Pre-commit hooks for checking Git user settings."
 readme = "README.md"
 license = "MIT"
 authors = [
-    { name = "Sergey Grigoriev", email = "s.grigoriev@gmail.com" }
+    { name = "Sergey Grigoriev", email = "grigoriev@fastmail.com" }
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
