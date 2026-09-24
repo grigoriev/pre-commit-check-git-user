@@ -6,6 +6,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/grigoriev/pre-commit-check-git-user)](https://github.com/grigoriev/pre-commit-check-git-user/releases)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/grigoriev/pre-commit-check-git-user/badge)](https://scorecard.dev/viewer/?uri=github.com/grigoriev/pre-commit-check-git-user)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
@@ -136,11 +137,20 @@ uv run ruff format .
 │   ├── test_check_git_config_user_email.py
 │   └── test_check_git_config_user_name.py
 ├── .github/workflows/
+│   ├── bump-version.yml
 │   ├── ci.yml
-│   └── release.yml
+│   ├── release.yml
+│   └── scorecard.yml
 ├── pyproject.toml
 └── .pre-commit-hooks.yaml
 ```
+
+## Disclaimer
+
+This software is provided "as is", without warranty of any kind, as the LICENSE states. Use
+it at your own risk. Sergey Grigoriev is not liable for damage from its use, as far as the law
+allows. It is published free of charge, outside of any commercial offering, with no
+obligation to support it. Security reports are welcome, see [SECURITY.md](SECURITY.md).
 
 ## License
 
