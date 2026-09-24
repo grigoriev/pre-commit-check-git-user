@@ -1,14 +1,15 @@
 # pre-commit-check-git-user
 
 [![CI](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/ci.yml/badge.svg)](https://github.com/grigoriev/pre-commit-check-git-user/actions/workflows/ci.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=coverage)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/grigoriev/pre-commit-check-git-user/badge)](https://scorecard.dev/viewer/?uri=github.com/grigoriev/pre-commit-check-git-user)
 [![GitHub Release](https://img.shields.io/github/v/release/grigoriev/pre-commit-check-git-user)](https://github.com/grigoriev/pre-commit-check-git-user/releases)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/grigoriev/pre-commit-check-git-user/badge)](https://scorecard.dev/viewer/?uri=github.com/grigoriev/pre-commit-check-git-user)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=grigoriev_pre-commit-check-git-user&metric=coverage)](https://sonarcloud.io/summary/new_code?id=grigoriev_pre-commit-check-git-user)
 
 Pre-commit hooks for validating Git user configuration. Ensure that `user.name` and `user.email` in your Git config match specified patterns before committing.
 
