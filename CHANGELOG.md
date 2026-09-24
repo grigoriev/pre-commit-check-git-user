@@ -14,6 +14,10 @@ Releases before 0.9.4 are listed on the
 
 - The version bump moves the Unreleased entries of this changelog into a section for
   the new version. The GitHub release takes its notes from that section.
+- Align the repository with the shared baseline: workflow values reach `run:` through
+  `env:`, CI jobs have time limits, the version bump pushes without stored credentials,
+  a release run fails when the release exists already, SonarCloud analyzes the tests as
+  tests, and the author email is `grigoriev@fastmail.com`.
 
 ## [0.9.4] - 2026-09-24
 
