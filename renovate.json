@@ -9,6 +9,10 @@
   "automergeType": "pr",
   "platformAutomerge": false,
   "pinDigests": true,
+  "osvVulnerabilityAlerts": true,
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchUpdateTypes": [

@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add the OpenSSF Scorecard workflow and badge.
 - Let Renovate pin GitHub Actions by commit digest.
 - Attach a signed build provenance bundle (`*.intoto.jsonl`) to each GitHub release.
+- Update pygments to 2.21.0 (PYSEC-2026-2987, ReDoS). It is a test dependency only.
+- Let Renovate refresh the lock file weekly and open PRs for known vulnerabilities in it.
 
 ### Changed
 

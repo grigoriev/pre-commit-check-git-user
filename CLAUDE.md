@@ -100,7 +100,6 @@ def test_example(self, mock_run):
 
 - **Release** (`release.yml`): Runs on `v*` tags
   - Runs tests
-  - Publishes to PyPI (trusted publisher)
   - Creates GitHub release with the wheel, the sdist and a signed provenance bundle
     (`actions/attest-build-provenance`, `*.intoto.jsonl`)
 
@@ -113,4 +112,4 @@ def test_example(self, mock_run):
    git tag v0.9.2
    git push origin v0.9.2
    ```
-4. GitHub Actions will automatically publish to PyPI
+4. GitHub Actions creates the GitHub release. The package is not published to PyPI
